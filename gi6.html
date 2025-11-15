@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock, Paper, Scissors</title>
+    <!-- css link -->
+    <link rel="stylesheet" href="gi6.css" />
+    <!-- java link ( deferred to run after html loads )-->
+     <script src="gi6.js" defer></script>
+    <!-- google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Coming+Soon&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="page-container">
+    <!-- top title / instruction card -->
+    <header class="top-section">
+      <h1>Rock , Paper , Scissors</h1>
+      <p class="instructions">
+        Type rock, paper, or scissors to play.
+      </p>
+      <div class="input-row">
+        <label for="user-choice-input">Choice:</label>
+        <!-- text box input -->
+        <input type="text" id="user-choice-input" placeholder="rock, paper, or scissors" />
+        <button id="play-button">Play</button>
+      </div>
+      <!-- left empty for js messages -->
+      <p id="message" class="message"></p>
+    </header>
+
+    <!-- paws and kitty boxes ( visual game arena ) -->
+    <main class="middle-section">
+      <div class="arena">
+        <!-- user's kitty box ( left ) -->
+        <div class="box user-box">
+          <img src="gi6_media/kittybox.PNG" alt="user box">
+        </div>
+
+        <!-- computer's kitty box ( right )-->
+        <div class="box computer-box">
+          <img src="gi6_media/kittybox.PNG" alt="computer box">
+        </div>
+
+        <!-- user's paw -->
+        <div class="paw user-paw">
+          <!-- id and emtpy src left for js -->
+          <img id="user-choice-img" src="" alt="paw choice" />
+        </div>
+
+        <!-- computer's paw -->
+        <div class="paw computer-paw">
+          <!-- id and emtpy src left for js -->
+          <img id="computer-choice-img" src="" alt="paw choice" />
+        </div>
+      </div>
+    </main>
+
+    <!-- bottom scoreboard & reset -->
+    <footer class="bottom-section">
+      <div class="scoreboard">
+        <h2>Scoreboard</h2>
+        <div class="score-row">
+          <span>Wins:</span>
+          <!-- id for js ; starts at 0 -->
+          <span id="wins-count">0</span>
+        </div>
+        <div class="score-row">
+          <span>Losses:</span>
+          <!-- id for js ; starts at 0 -->
+          <span id="losses-count">0</span>
+        </div>
+        <div class="score-row">
+          <span>Ties:</span>
+          <!-- id for js ; starts at 0 -->
+          <span id="ties-count">0</span>
+        </div>
+      </div>
+      <!-- reset button -->
+      <button id="reset-button" class="reset-button">Reset Game</button>
+    </footer>
+  </div>
+
+  <!-- popup -->
+  <div id="result-popup" class="popup">
+    <div class="popup-content">
+      <!-- left empty for js message -->  
+      <p id="popup-text"></p>
+      <!-- gif -->
+      <img id="popup-gif" class="popup-gif" src="" alt="" />  
+      <button id="close-popup-button">OK</button>
+    </div>
+  </div>
+</body>
+</html>

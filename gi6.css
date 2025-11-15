@@ -1,0 +1,354 @@
+/* - - - global size & edits - - - */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Coming Soon", Arial, Helvetica, sans-serif;
+  background-color: white;
+}
+
+.page-container {
+  min-height: 100vh; /* at least full screen height */
+  display: flex;
+  flex-direction: column; /* stack everything vertically */
+  justify-content: space-between; /* pushes content vertically */
+  padding: 20px 16px;
+}
+
+
+/* - - - top title / instruction card - - - */
+.top-section {
+  text-align: center;
+  max-width: 600px; /* prevents card from getting too wide on screens */
+  margin: 0 auto 40px auto; /* center horizontally and add 40px at bottom */
+  background-color: #f8c8dc;
+  padding: 16px 20px; /* inner spacing */
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12); /* slight shadow */
+}
+
+.top-section h1 {
+  margin: 0 0 6px 0; /* removes top margin & keeps 6px below title */
+}
+
+.instructions {
+  margin: 0 0 10px 0; /* 10px below instructions */
+  font-size: 0.95rem; /* a little smaller than default size */
+  color: #555; /* softer grey as opposed to black */
+}
+
+.input-row {
+  display: flex; /* make (choice, input box, button) into a row */
+  justify-content: center; /* row centered horizontally */
+  align-items: center; /* vertically aligns in middle */
+  gap: 8px; /* space between */
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.input-row label {
+  font-size: 0.9rem; 
+}
+
+#user-choice-input {
+  padding: 6px 8px;
+  font-size: 0.95rem;
+  min-width: 180px; /* prevents shrinking */
+}
+
+button {
+  padding: 7px 12px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 999px;
+  border: none;
+  font-family: "Coming Soon", Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5em; /* space between letters */
+  transition: background-color 0.25s ease, transform 0.15s ease; /* smooth bg change */
+}
+
+#play-button {
+  background-color: #c9e8ff;
+  color: #2d2d2d;
+}
+
+#play-button:hover {
+  background-color: #b9dcf5;
+  transform: translateY(-2px); /* moves up 2 px */
+}
+
+.message { /* for invalid input */
+  min-height: 18px;
+  font-size: 0.85rem;
+  color: #d9534f; /* red color for error */
+  margin-top: 6px;
+}
+
+
+/* - - - visual game arena - - - */
+.middle-section {
+  flex: 1; /* stretches to fill remaining space */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* mobile breakout */
+.arena {
+  position: relative; /* parent elemtent for positioned children (.box, .paw) */
+  width: 100%; /* fills complete width */
+  max-width: 340px; /* never wider than 340px */
+  height: 240px; /* fixed height */
+}
+
+.box {
+  position: absolute; /* .arena - parent element */
+  bottom: -10px; /* slightly below bottom edge of arena box */
+  width: 48%;
+  z-index: 3; /* in front of paws and other elements */
+}
+
+.box img {
+  width: 100%; /* completely fills img box */
+  height: auto;
+}
+
+.user-box {
+  left: 2%; /* positions near side of the arena */
+}
+
+.computer-box {
+  right: 2%; /* positions near side of the arena */
+}
+
+.paw {
+  position: absolute; /* inside parent elemtent arena */
+  bottom: 115px; /* how high paws appear */
+  width: 40%; /* relative to arena width */
+  text-align: center;
+  transform: translateY(100%); /* paw moved down to begin */
+  opacity: 0; /* completely invisible to start */
+  z-index: 2; /* one index below the boxes */
+}
+
+.user-paw {
+  left: 6%; /* horizontal positioning */
+}
+
+.computer-paw {
+  right: 6%; /* horizontal positioning */
+}
+
+.paw img {
+  width: 70px; /* size of img on mobile */
+  height: auto;
+}
+
+/* tablet breakout */
+@media screen and (min-width: 600px) {
+  .arena { /* larger arena for tablet screen */
+    max-width: 540px;
+    height: 300px;
+  }
+
+  .top-section {
+    margin: 0 auto 70px auto; /* more margin space */
+  }
+  
+  .box { /* resizing */
+    bottom: -30px;
+    width: 260px;
+  }
+
+  .user-box { /* horizontal shift for alignment */
+    left: 4%;
+  }
+
+  .computer-box { /* horizontal shift for alignment */
+    right: 4%;
+  }
+
+  .paw { /* resizing */
+    bottom: 150px;
+    width: 130px;
+  }
+
+  .user-paw { /* horizontal shift for alignment */
+    left: 14%;
+  }
+
+  .computer-paw { /* horizontal shift for alignment */
+    right: 14%;
+  }
+
+  .paw img { /* resizing */
+    width: 80px;
+  }
+}
+
+/* desktop breakout */
+@media screen and (min-width: 900px) {
+  .arena { /* larger arena for desktop screen */
+    max-width: 700px;
+    height: 340px;
+  }
+
+  .box { /* bigger box */
+    bottom: -30px;
+    width: 320px;
+    z-index: 3;
+  }
+
+  .user-box { /* horizontal shift for alignment */
+    left: 4%;
+  }
+
+  .computer-box { /* horizontal shift for alignment */
+    right: 4%;
+  }
+
+  .paw {
+    bottom: 170px; /* anchored a bit higher */
+    width: 130px;
+    text-align: center;
+  }
+
+  .user-paw { /* horizontal shift for alignment */
+    left: 15%;
+  }
+
+  .computer-paw { /* horizontal shift for alignment */
+    right: 18%;
+  }
+
+  .paw img { /* resizing */
+    width: 80px;
+  }
+}
+
+/* paw animation */
+@keyframes paw-rise {
+  0% { /* starting position */
+    transform: translateY(160%); /* way below box */
+    opacity: 0; /* starts invisible */
+  }
+  30% {
+    opacity: 0;
+  }
+  55% { /* fading in slightly */
+    opacity: 0.6;
+  }
+  65% { /* bounce */
+    transform: translateY(-12%); /* slightly above anchored position for bounce */
+    opacity: 1; /* fully visible */
+  }
+  80% {
+    transform: translateY(-3%); /* comes closer to anchored position */
+    opacity: 1; /* fully visible */
+  }
+  100% {
+    transform: translateY(0%); /* paws are placed into anchored position */
+    opacity: 1; /* fully visible */
+  }
+}
+
+.paw.show {
+  animation: paw-rise 0.9s cubic-bezier(0.25, 0.46, 0.45, 1) forwards;
+  /* starts paw rise animation , custom ease curve (x1, y1, x2, y2), and forwards - to keep final animation state */
+}
+
+/* - - - bottom scoreboard & reset - - - */
+.bottom-section {
+  max-width: 350px; /* set width */
+  margin: 10px auto 0 auto;
+  text-align: center;
+}
+
+.scoreboard { /* similar styling to .top-section , just with pastel blue */
+  background-color: #c9e8ff;
+  padding: 14px 18px;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+  margin-bottom: 10px;
+}
+
+.scoreboard h2 {
+  margin: 0 0 8px 0; /* 8px under scoreboard title */
+  font-size: 1.1rem;
+}
+
+.score-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 3px 0; /* vertical margins between rows */
+  font-size: 0.95rem;
+}
+
+.reset-button {
+  width: 100%; /* full width of container */
+  background-color: #f8c8dc;
+  color: #2d2d2d;
+}
+
+.reset-button:hover {
+  background-color: #f4b5cf;
+  transform: translateY(-2px); /* lift up 2px */
+}
+
+/* - - - popup - - - */
+.popup {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* centered popup content */
+  background-color: rgba(0, 0, 0, 0.25); /* slighter darker bg */
+  opacity: 0; /* invisible when hidden */
+  pointer-events: none; /* not clickable when hidden */
+  transition: opacity 0.2s ease; /* smooth fade in/out */
+  z-index: 10; /* appears on top of everything */
+}
+
+.popup.visible {
+  opacity: 1; /* becomes visible */
+  pointer-events: auto; /* clickable */
+}
+
+.popup-content {
+  background-color: white;
+  padding: 18px 24px;
+  border-radius: 16px;
+  min-width: 220px; /* ensures popup won't shrink */
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  border: 3px solid #f8c8dc;
+}
+
+.popup-content p {
+  margin: 0 0 12px 0;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.popup-gif {
+  display: block;
+  max-width: 200px;
+  max-height: 200px;
+  margin: 10px auto 12px auto;
+  border-radius: 12px;
+  object-fit: cover; /* gif filles the box */
+}
+
+#close-popup-button {
+  background-color: #c9e8ff;
+  color: #2d2d2d;
+}
+
+#close-popup-button:hover {
+  background-color: #b9dcf5;
+  transform: translateY(-2px); /* moves up 2px */
+}
